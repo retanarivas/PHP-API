@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getData('dolar');">Dolar</button>
+    <button onclick="getData('euro');">Euro</button>
+
+    <ul id="result">
+        
+    </ul>
+
+    <script>
+
+        function getData(currency) {
+            fetch('http://localhost:8080/API/backend/'+currency)
+            .then(datos => datos.json())
+            .then(datos => {
+                console.log(datos);
+                var result = document.getElementById('result');
+                result.innerHTML = '';
+                for(let dato of datos) {
+                    result.innerHTML += `
+                    <li>Date: ${dato[2]} - Value: ${dato[1]}</li>
+                    `
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
